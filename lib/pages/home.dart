@@ -80,16 +80,16 @@ class _HomePageState extends State<HomePage> {
       const SizedBox(height: 20),
      Padding(
       padding: const EdgeInsets.all(8.0),
-      child: SearchAnchor(
-        builder: (BuildContext context,SearchController controller){
-          return SearchBar(
+      child: SearchAnchor(                                      //SearchAnchor = wrapper that manages search + suggestions.
+        builder: (BuildContext context,SearchController controller){    //SearchController = brain that keeps track of text & dropdown state.
+          return SearchBar(                                       //SearchBar = input field (UI).
             controller: controller,
             leading: const Icon(Icons.search),
             onTap: () => controller.openView(),
             onChanged: (value) => controller.openView(),
           );
         },
-        suggestionsBuilder: (context,controller){
+        suggestionsBuilder: (context,controller){                     //suggestionsBuilder = dropdown items below it.
           return List.generate(3, (index){
             return ListTile(
               title:Text('https://example.com/very-long-url-that needs-shortening$index'),
