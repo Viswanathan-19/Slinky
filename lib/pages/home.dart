@@ -54,36 +54,61 @@ class _HomePageState extends State<HomePage> {
           
         ],
       ),
-      body: Padding(
+     body: Padding(
   padding: const EdgeInsets.only(top: 24), // space below AppBar
   child: Column(
-    crossAxisAlignment: CrossAxisAlignment.center, // center horizontally
-    mainAxisSize: MainAxisSize.min, // compact height
-    children: const [
-      Icon(
+    crossAxisAlignment: CrossAxisAlignment.center, 
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      const Icon(
         Icons.link,
         size: 50,
         color: Colors.blue,
       ),
-      SizedBox(height: 16),
-      Text(
+      const SizedBox(height: 16),
+      const Text(
         'Shorten Your URLs',
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: 40, color: Colors.blue),
       ),
-      SizedBox(height: 10),
-      Text(
+      const SizedBox(height: 10),
+      const Text(
         'Transform long, complex URLs into clean, shareable links in seconds. Fast, secure, and completely free.',
         textAlign: TextAlign.center,
         style: TextStyle(fontSize: 16, color: Colors.black),
       ),
-    ],
-  ),
-),
-
-
+      const SizedBox(height: 20),
+     Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SearchAnchor(
+        builder: (BuildContext context,SearchController controller){
+          return SearchBar(
+            controller: controller,
+            leading: const Icon(Icons.search),
+            onTap: () => controller.openView(),
+            onChanged: (value) => controller.openView(),
+          );
+        },
+        suggestionsBuilder: (context,controller){
+          return List.generate(3, (index){
+            return ListTile(
+              title:Text('https://example.com/very-long-url-that needs-shortening$index'),
+           onTap: () {
+    controller.closeView(
+    'https://example.com/very-long-url-that-needs-shortening$index'
+  );
+},
+            );
+          }
+          );
+        },
+      ),
 
       
-    );
+     )
+    ]  
+  ),
+     )
+     );
   }
 }
